@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="./web3.min.js"></script>
+    <script type="text/javascript" src="./abi.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css">
+	<title>Flip the coin! Win some money!</title>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<div class="row">
+      		<div class="col-sm-4 container-fluid pt-3" id="donate">
+      			<h4>Toss a coin to your witcher!</h4>
+      			<br>
+      			<div class="row">
+      				<div class="col-sm-6">
+      					<input type="text" class="form-control form-control" id="donate_value">
+      				</div>
+      				<div class="col-sm-6">
+      					<button type="button" class="btn btn-info btn-block" id="press_to_donate">Donate ETH</button>
+      				</div>
+    			</div>
+      		</div>
+      		<div class="col-sm-4">
+      			<h1>SuperFliper</h1>
+  				<p>Test your luck and flip a coin with a chance of 50% to double your investment</p>
+  			</div>
+      		<div class="col-sm-4 container-fluid pt-3" id="balance"></div>
+    	</div>	
+	</div>
+	<div class="row">
+		<div class="col-sm container-fluid pt-3">
+			<div class="container-fluid pt-3 text-center">
+				<h3>Playing rules</h3>
+			</div>
+			<div class="container-fluid pt-3 text-center">
+				<ul>
+					<li><h5>You must use your own ethereum address!</h5></li>
+					<li><h5>If you guess right, your bet will be doubled!</h5></li>
+					<li><h5>The betting amount should be bigger than 0.001 ETH</h5></li>
+					<li><h5>You cannot wager more ether than the contract balance</h5></li>
+					<li><h5>Good luck, have fun!</h5></li>
+				</ul>
+			</div>
+			
+		</div>
+
+		<div class="col-sm-1"></div>
+
+		<div class="col-sm container-fluid pt-3">
+			<div class="container-fluid pt-3 coin" id="result">
+				<div class="heads"></div>
+				<div class="tails"></div>
+			</div>
+			<br>
+			<div class="container-fluid pt-3">
+				<div class="row">
+		      		<div class="col-sm-6">
+		      			<button type="button" class="btn btn-outline-success btn-block" id="heads">Heads</button>
+		      		</div>
+		      		<div class="col-sm-6">
+		      			<button type="button" class="btn btn-outline-success btn-block" id="tails">Tails</button>
+		      		</div>
+		    	</div>
+		    </div>
+			<div class="container-fluid pt-3">
+				<input type="text" class="form-control form-control" id="bet_value">
+			</div>
+			<div class="container-fluid pt-3">
+				<button type="button" class="btn btn-info btn-block" id="press_to_bet">Gamble</button>
+			</div>
+		</div>
+
+		<div class="col-sm-1"></div>
+
+		<div class="col-sm container-fluid pt-3">
+			<div class="container-fluid pt-3 text-center">
+				<h3>The owner of the game can withdraw the funds!</h3>
+			</div>
+			<div class="container pt-3">
+				<input type="text" class="form-control form-control" id="withdraw_value">
+			</div>
+			<div class="container pt-3">
+				<button type="button" class="btn btn-info btn-block" id="press_to_withdraw">Withdraw</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
