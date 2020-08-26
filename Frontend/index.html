@@ -4,6 +4,7 @@
 	 <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"type="application/javascipt"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -14,48 +15,102 @@
       crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    
+
+    <!-- web3 + abi + main -->
     <script type="text/javascript" src="./web3.min.js"></script>
     <script type="text/javascript" src="./abi.js"></script>
     <script type="text/javascript" src="./main.js"></script>
 
+    <!-- custom alert tab -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- Stylesheet + Favicon -->
     <link rel="stylesheet" type="text/css" href="./style.css">
-	<title>Flip the coin! Win some money!</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<title>SuperFlip</title>
 </head>
 <body>
+	<div class="alert show" id="1tx_alert">
+		<span class="fas fa-exclamation-circle"></span>
+		<span class="msg">Waiting for your lucky side!</span>
+		<span class="close-btn" id="1tx_alert_btn">
+			<span class="fas fa-times"></span>
+		</span>
+	</div>
+
+	<div class="alert show" id="luck_alert">
+		<span class="fas fa-exclamation-circle"></span>
+		<span class="msg">Good luck!</span>
+		<span class="close-btn" id="luck_alert_btn">
+			<span class="fas fa-times"></span>
+		</span>
+	</div>
+
+	<div class="alert show"	id="donate_alert">
+		<span class="fas fa-exclamation-circle"></span>
+		<span class="msg">Thanks for your donation!</span>
+		<span class="close-btn" id="donate_alert_btn">
+			<span class="fas fa-times"></span>
+		</span>
+	</div>
+
+	<div class="alert show" id="destroy_alert">
+		<span class="fas fa-exclamation-circle"></span>
+		<span class="msg">The contract was destroyed!</span>
+		<span class="close-btn" id="destroy_alert_btn">
+			<span class="fas fa-times"></span>
+		</span>
+	</div>
+
+	<div class="alert show" id="withdraw_alert">
+		<span class="fas fa-exclamation-circle"></span>
+		<span class="msg">The selected sum was withdrawn!</span>
+		<span class="close-btn" id="withdraw_alert_btn">
+			<span class="fas fa-times"></span>
+		</span>
+	</div>
+
 	<div class="jumbotron text-center">
 		<div class="row">
-      		<div class="col-sm-4 container-fluid pt-3" id="donate">
-      			<h4>Toss a coin to your witcher!</h4>
-      			<br>
-      			<div class="row">
-      				<div class="col-sm-6">
-      					<input type="text" class="form-control form-control" id="donate_value">
-      				</div>
-      				<div class="col-sm-6">
-      					<button type="button" class="btn btn-info btn-block" id="press_to_donate">Donate ETH</button>
-      				</div>
-    			</div>
+      		<div class="col-sm-4 container-fluid pt-3" id="playerInfo">
+  				<h4>Test your luck and flip a coin with a chance of 50% to double your investment</h4>
       		</div>
       		<div class="col-sm-4">
       			<h1>SuperFliper</h1>
-  				<p>Test your luck and flip a coin with a chance of 50% to double your investment</p>
   			</div>
       		<div class="col-sm-4 container-fluid pt-3" id="balance"></div>
     	</div>	
 	</div>
-	<div class="row">
-		<div class="col-sm container-fluid pt-3">
+	<div class="row bottom">
+		<div class="col-sm container-fluid pt-3 nw-bor-1">
 			<div class="container-fluid pt-3 text-center">
-				<h3>Playing rules</h3>
+				<h2>Playing rules</h2>
 			</div>
 			<div class="container-fluid pt-3 text-center">
 				<ul>
-					<li><h5>You must use your own ethereum address!</h5></li>
-					<li><h5>If you guess right, your bet will be doubled!</h5></li>
-					<li><h5>The betting amount should be bigger than 0.001 ETH</h5></li>
-					<li><h5>You cannot wager more ether than the contract balance</h5></li>
-					<li><h5>Good luck, have fun!</h5></li>
+					<li><h4>You must use your own ethereum address!</h4></li>
+					<li><h4>If you guess right, your bet will be doubled!</h4></li>
+					<li><h4>The betting amount should be bigger than 0.01 ETH</h4></li>
+					<li><h4>The tax for generating a absolute random result is 0.004 ETH, it is going directly to the miners, we do not keep a single part of it</h4></li>
+					<li><h4>You cannot wager more ether than the contract balance</h4></li>
+					<li><h4>Good luck, have fun!</h4></li>
 				</ul>
 			</div>
 			
@@ -72,32 +127,51 @@
 			<div class="container-fluid pt-3">
 				<div class="row">
 		      		<div class="col-sm-6">
-		      			<button type="button" class="btn btn-outline-success btn-block" id="heads">Heads</button>
+		      			<button type="button" class="btn btn-outline-success btn-block active" id="eth_face">ETH</button>
 		      		</div>
 		      		<div class="col-sm-6">
-		      			<button type="button" class="btn btn-outline-success btn-block" id="tails">Tails</button>
+		      			<button type="button" class="btn btn-outline-success btn-block" id="btc_face">BTC</button>
 		      		</div>
 		    	</div>
 		    </div>
 			<div class="container-fluid pt-3">
-				<input type="text" class="form-control form-control" id="bet_value">
+				<input type="text" placeholder="Place your bet!" class="form-control" id="bet_value">
 			</div>
 			<div class="container-fluid pt-3">
 				<button type="button" class="btn btn-info btn-block" id="press_to_bet">Gamble</button>
+			</div>
+			<div class="container-fluid pt-3 info">
+				
 			</div>
 		</div>
 
 		<div class="col-sm-1"></div>
 
-		<div class="col-sm container-fluid pt-3">
+		<div class="col-sm container-fluid pt-3 nw-bor-2">
+			<div class="container-fluid pt-3 text-center">
+				<h3>Toss a coin to your witcher!</h3>
+      		</div>
+      		<div class="container pt-3">
+      			<input type="text" placeholder="Donate amount" class="form-control" id="donate_value">
+      		</div>
+      		<div class="container pt-3">	
+      			<button type="button" class="btn btn-info btn-block" id="press_to_donate">Donate ETH</button>
+			</div>
 			<div class="container-fluid pt-3 text-center">
 				<h3>The owner of the game can withdraw the funds!</h3>
 			</div>
 			<div class="container pt-3">
-				<input type="text" class="form-control form-control" id="withdraw_value">
+				<input type="text" placeholder="Withdraw amount" class="form-control" id="withdraw_value">
 			</div>
 			<div class="container pt-3">
 				<button type="button" class="btn btn-info btn-block" id="press_to_withdraw">Withdraw</button>
+			</div>
+			<br>
+			<div class="container-fluid pt-3 text-center">
+				<h3>The owner of the game can destroy the smart contract if he wishes so!!</h3>
+			</div>
+			<div class="container pt-3">
+  				<button type="button" class="btn btn-info btn-block" id="press_to_destroy">Destroy the smart contract</button>
 			</div>
 		</div>
 	</div>

@@ -1,32 +1,69 @@
+body {
+	background-color: #8EE4AF; overflow: hidden;
+}
+
+.jumbotron { background-color: #379683; border-bottom: 4px solid #DAAD86; }
+
+
+li { color: #EDF5E1; }
+
+.bottom h4 { color: #05386B; }
+.bottom h3 { color: #05386B; }
+.bottom h2 { color: #05386B; }
+
+.jumbotron h1 { color: #EDF5E1; }
+.jumbotron h4 { color: #EDF5E1; }
+
+#press_to_bet, #press_to_withdraw, #press_to_donate, #press_to_destroy {
+	background-color: #EDF5E1; color: #05386B; font-size: 17px; border: none; outline: none; font-weight: 500;
+}
+
+#bet_value, #withdraw_value, #donate_value {
+	background-color: #379683; border-color: #379683;
+}
+
+#bet_value[type=text] {
+	color: #EDF5E1; text-align: center; font-size: 16px; font-weight: 500;
+}
+
+#withdraw_value[type=text] {
+	color: #EDF5E1; text-align: center; font-size: 16px; font-weight: 500;
+}
+
+#donate_value[type=text] {
+	color: #EDF5E1; text-align: center; font-size: 16px; font-weight: 500;
+}
+
+#bet_value::placeholder {
+	color: #EDF5E1; opacity: 0.5; text-align: center; font-size: 16px; font-weight: 500;
+}
+
+#withdraw_value::placeholder  {
+ 	color: #EDF5E1; opacity: 0.5; text-align: center; font-size: 16px; font-weight: 500;
+}
+
+#donate_value::placeholder {
+	color: #EDF5E1; opacity: 0.5; text-align: center; font-size: 16px; font-weight: 500;
+}
 
 .coin {
-	width: 15rem;
-	height: 15rem;
-	transform-style: preserve-3d;
+	width: 15rem; height: 15rem; transform-style: preserve-3d; 
 }
 
 .coin div {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-	backface-visibility: hidden;
-	position: absolute;
+	width: 100%; height: 100%; border-radius: 50%; backface-visibility: hidden; position: absolute;
 }
 
 .coin .heads {
-	background: url("Head.jpg");
-	background-size: contain;
+	background: url("ETH.jpg"); background-size: contain;
 }
 
 .coin .tails {
-	background: url("Tail.jpg");
-	background-size: contain;
-	transform: rotateY(-180deg);
+	background: url("BTC.jpg"); background-size: contain; transform: rotateY(-180deg);
 }
 
 .win {
-	animation: win 3s;
-	animation-fill-mode: forwards;
+	animation: win 3s; animation-fill-mode: forwards;
 }
 
 @keyframes win {
@@ -39,8 +76,7 @@
 }
 
 .lose {
-	animation: lose 3s;
-	animation-fill-mode: forwards;
+	animation: lose 3s; animation-fill-mode: forwards;
 }
 
 @keyframes lose {
@@ -53,8 +89,7 @@
 }
 
 .switch {
-	animation: switch 3s;
-	animation-fill-mode: forwards;
+	animation: switch 3s; animation-fill-mode: forwards;
 }
 
 @keyframes switch {
@@ -64,4 +99,79 @@
 	to {
 		transform: rotateY(180deg);
 	}
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+::-moz-scrollbar {
+    display: none;
+}
+::-o-scrollbar {
+    display: none;
+}
+
+.alert {
+	background: #ffdb9b; padding: 20px 40px; min-width: 420px; position: absolute; right: 0px; top: 10px; overflow: hidden; border-radius: 4px; border-left: 4px solid #ffa502; opacity: 0; pointer-events: none;
+}
+
+.alert.showAlert {
+	opacity: 1; pointer-events: auto;
+}
+
+.alert.show {
+	animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide {
+	0%{
+		transform: translateX(100%);
+	}
+	40%{
+		transform: translateX(-10%);
+	}
+	80%{
+		transform: translateX(0%);
+	}
+	100%{
+		transform: translateX(-10px);
+	}
+}
+
+.alert.hide {
+	animation: hide_slide 1s ease forwards;
+}
+
+@keyframes hide_slide {
+	0%{
+		transform: translateX(-10px);
+	}
+	40%{
+		transform: translateX(0%);
+	}
+	80%{
+		transform: translateX(-10%);
+	}
+	100%{
+		transform: translateX(100%);
+	}
+}
+
+.alert .fa-exclamation-circle {
+	position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #ce8500; font-size: 30px;
+}
+.alert .msg {
+	padding: 0 20px; font-size: 18px; color: #ce8500;
+}
+
+.alert .close-btn {
+	position: absolute; right: 0px; top: 50%; transform: translateY(-50%); background: #ffd080; padding: 20px 18px; cursor: pointer;
+}
+
+.close-btn:hover {
+	background: #ffc766;
+}
+
+.close-btn .fa-times {
+	color: #ce8500; font-size: 22px; line-height: 40px;
 }
